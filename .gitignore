@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .env
 outputs/
+frames/
+frames_*/
 *.mp4
 *.webm
-frames/
