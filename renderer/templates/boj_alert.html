@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .badge {
+    position:absolute; top:220px; left:50%;
+    transform:translateX(-50%) scale(0);
+    background:#d32f2f; color:white; padding:24px 48px; border-radius:16px;
+    font-size:56px; font-weight:800; letter-spacing:2px;
+    animation: popIn 0.6s cubic-bezier(.17,.89,.32,1.49) forwards,
+               pulse 1.6s ease-in-out 0.6s infinite;
+  }
+  @keyframes popIn { to { transform:translateX(-50%) scale(1); } }
+  @keyframes pulse {
+    0%,100%{ box-shadow:0 0 0 0 rgba(211,47,47,0.5); }
+    50%{ box-shadow:0 0 0 24px rgba(211,47,47,0); }
+  }
+
+  .formula {
+    position:absolute; top:420px; left:50%; transform:translateX(-50%) translateY(30px);
+    font-size:44px; color:#fff; background:rgba(20,20,20,0.85);
+    padding:32px 40px; border-radius:20px;
+    opacity:0; text-align:center; line-height:1.5;
+    animation: fadeUp 0.8s ease forwards; animation-delay: 1.2s;
+  }
+  .highlight {
+    position:absolute; top:640px; left:50%; transform:translateX(-50%) translateY(30px);
+    font-size:32px; color:#ff5252; font-weight:700; opacity:0;
+    animation: fadeUp 0.8s ease forwards; animation-delay: 2.2s;
+  }
+  @keyframes fadeUp {
+    to { opacity:1; transform:translateX(-50%) translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="badge">⚠ BOJ RISK</div>
+    <div class="formula">Total Inflows × 7.5%<br>= VAT Owed</div>
+    <div class="highlight">even non-sales inflows</div>
+  </div>
+</body>
+</html>
