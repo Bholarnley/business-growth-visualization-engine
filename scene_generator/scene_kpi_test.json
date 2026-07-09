@@ -1,0 +1,19 @@
+{
+  "source_video": "new_llc.mp4",
+  "logo": "logo_MJB.jpg",
+  "output_name": "scene_output_multi.mp4",
+  "scenes": [
+    {
+      "template": "kpi_counter",
+      "frames_folder": "frames_kpi",
+      "start_time": 20,
+      "duration": 3.2
+    },
+    {
+      "template": "cit_timeline",
+      "frames_folder": "frames_cit_timeline",
+      "start_time": 41,
+      "duration": 5.5
+    }
+  ]
+}
