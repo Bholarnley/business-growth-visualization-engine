@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .heading {
+    position:absolute; top:100px; left:50%; transform:translateX(-50%) scale(0.8); opacity:0;
+    font-size:34px; font-weight:800; color:var(--brand-white);
+    background: var(--gradient-primary);
+    padding:16px 32px; border-radius:14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(.22,.68,0,1.01), opacity 0.8s ease;
+    text-align:center;
+  }
+  .heading.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .cardWrap {
+    position:absolute; top:260px; left:60px; width:960px; height:520px;
+    border-radius:24px; overflow:hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .panel {
+    position:absolute; top:0; width:50%; height:100%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:30px; box-sizing:border-box; text-align:center;
+  }
+
+  .panel.before {
+    left:0; background: linear-gradient(160deg, #3a3a3a, var(--brand-black));
+    transform: translateX(-100%); transition: transform 0.8s cubic-bezier(.22,.68,0,1.01);
+  }
+  .panel.before.show { transform: translateX(0); }
+
+  .panel.after {
+    right:0; background: var(--gradient-highlight);
+    transform: translateX(100%); transition: transform 0.8s cubic-bezier(.22,.68,0,1.01);
+  }
+  .panel.after.show { transform: translateX(0); }
+
+  .tag {
+    font-size:26px; font-weight:800; letter-spacing:2px; margin-bottom:20px;
+    color: rgba(255,255,255,0.75);
+  }
+  .after .tag { color: rgba(255,255,255,0.9); }
+
+  .mainText {
+    font-size:32px; font-weight:700; color:var(--brand-white); line-height:1.4;
+  }
+
+  .divider {
+    position:absolute; top:0; left:50%; width:6px; height:100%;
+    background: var(--brand-white); transform:translateX(-50%) scaleY(0);
+    transition: transform 0.5s ease; transform-origin: center;
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+  }
+  .divider.show { transform:translateX(-50%) scaleY(1); }
+
+  .vsBadge {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(0);
+    background: var(--brand-black); color:var(--brand-white);
+    width:70px; height:70px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:22px; z-index:5;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    transition: transform 0.5s cubic-bezier(.17,.89,.32,1.49);
+  }
+  .vsBadge.show { transform:translate(-50%,-50%) scale(1); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="heading" id="heading">MANUAL RECORDS vs REV360</div>
+
+    <div class="cardWrap">
+      <div class="panel before" id="before">
+        <div class="tag">BEFORE</div>
+        <div class="mainText">Manual, loose<br>bank statements</div>
+      </div>
+      <div class="panel after" id="after">
+        <div class="tag">AFTER</div>
+        <div class="mainText">Structured, traceable<br>bookkeeping records</div>
+      </div>
+      <div class="divider" id="divider"></div>
+      <div class="vsBadge" id="vsBadge">VS</div>
+    </div>
+  </div>
+
+<script>
+  const heading = document.getElementById('heading');
+  const before = document.getElementById('before');
+  const after = document.getElementById('after');
+  const divider = document.getElementById('divider');
+  const vsBadge = document.getElementById('vsBadge');
+
+  setTimeout(() => { heading.classList.add('show'); }, 200);
+  setTimeout(() => { before.classList.add('show'); }, 900);
+  setTimeout(() => { after.classList.add('show'); }, 900);
+  setTimeout(() => { divider.classList.add('show'); }, 1500);
+  setTimeout(() => { vsBadge.classList.add('show'); }, 1800);
+</script>
+</body>
+</html>
