@@ -1,0 +1,17 @@
+“VAT is not your money.
+Your client pays it — you are only collecting it on behalf of the government.
+For example, if your service is ₦100,000, your client should be charged ₦107,500.
+That ₦7,500 is VAT and must be separated immediately and remitted on or before the 21st of the following month.
+Now with Rev360 and the new compliance structure, VAT filing is no longer manual or loose — it is data-driven, structured, and highly traceable.
+And if you miss filing deadlines, penalties apply — starting from about ₦50,000, plus additional charges and interest depending on delay.”
+“But the real risk is not just penalties.
+It’s how VAT is assessed.”
+“Not all inflows are VATable — loans are not sales, transfers are not sales, and some NGOs, diplomatic bodies, exports, and VAT-exempt transactions are not taxable.”
+“But if your records are not properly classified, Rev360 can apply BOJ — Best of Judgment — and calculate VAT on total inflows at 7.5%.
+Meaning you could be taxed on money that was never actual sales.”
+“That’s why proper bookkeeping is now critical.
+You need a bookkeeper or accountant using systems like QuickBooks, Sage, Odoo, Zoho Books, or ERP tools, depending on business size, to correctly separate VATable and non-VATable transactions before filing.
+Because compliance is no longer guesswork — it is structured reporting.”
+“I’m Mobola Jimoh, I help you make sense of your numbers so you don’t have to stress.”
+
+
