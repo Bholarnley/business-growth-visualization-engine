@@ -16,9 +16,6 @@ WORDS_PER_SECOND = 2.5
 
 SECTION_HEADER_PATTERN = re.compile(r'\[[^\]]*\]')
 
-# Splits on whitespace that comes after sentence-ending punctuation, whether or
-# not a closing quote (straight or curly) sits between the punctuation and the
-# whitespace - and without deleting that quote character from the text.
 SENTENCE_SPLIT_PATTERN = re.compile(
     r'(?<=[.!?])\s+(?=[A-Z0-9"\u2018\u201c])'
     r'|(?<=[.!?]["\u2019\u201d])\s+(?=[A-Z0-9"\u2018\u201c])'
@@ -58,10 +55,12 @@ def estimate_scenes(script_text):
                 "reason": f"Risk/warning language detected: \"{sentence}\"",
             })
         elif has_short_deadline:
-            unhandled_moments.append({
+            scenes.append({
+                "template": "deadline_badge",
+                "frames_folder": "frames_deadline_badge",
                 "start_time": start_time,
-                "sentence": sentence,
-                "note": "Short/monthly deadline - consider building a matching template later",
+                "duration": 4.0,
+                "reason": f"Short/monthly deadline detected: \"{sentence}\"",
             })
         elif has_multi_month:
             duration = max(sentence_duration, 6.0)

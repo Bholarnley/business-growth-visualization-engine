@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .card {
+    position:absolute; top:140px; left:50%;
+    transform:translateX(-50%) scale(0.7); opacity:0;
+    background: linear-gradient(135deg, #3d2e00, #6b4f00);
+    padding:36px 44px; border-radius:22px; text-align:center;
+    box-shadow: 0 10px 40px rgba(255,193,7,0.35);
+    transition: transform 0.7s cubic-bezier(.17,.89,.32,1.49), opacity 0.5s ease;
+  }
+  .card.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .icon {
+    font-size:60px; margin-bottom:10px;
+  }
+
+  .label {
+    font-size:30px; color:#ffe082; font-weight:600; letter-spacing:1px;
+    margin-bottom:10px;
+  }
+
+  .day {
+    font-size:78px; font-weight:800;
+    background: linear-gradient(90deg, #ffd60a, #ffb300);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .sub {
+    margin-top:12px; font-size:26px; color:#ffe082; font-weight:600;
+    opacity:0; transition: opacity 0.6s ease;
+  }
+  .sub.show { opacity:1; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="icon">🗓️</div>
+      <div class="label">MONTHLY VAT DEADLINE</div>
+      <div class="day">21st</div>
+      <div class="sub" id="sub">Remit before this date, every month</div>
+    </div>
+  </div>
+
+<script>
+  const card = document.getElementById('card');
+  const sub = document.getElementById('sub');
+  const startDelay = 250;
+  const subDelay = 900;
+
+  setTimeout(() => { card.classList.add('show'); }, startDelay);
+  setTimeout(() => { sub.classList.add('show'); }, startDelay + subDelay);
+</script>
+</body>
+</html>

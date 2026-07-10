@@ -8,6 +8,13 @@
       "reason": "Currency amount detected: \"For example, if your service is ₦100,000, your client should be charged ₦107,500.\""
     },
     {
+      "template": "deadline_badge",
+      "frames_folder": "frames_deadline_badge",
+      "start_time": 16.0,
+      "duration": 4.0,
+      "reason": "Short/monthly deadline detected: \"That ₦7,500 is VAT and must be separated immediately and remitted on or before the 21st of the following month.\""
+    },
+    {
       "template": "boj_alert",
       "frames_folder": "frames_boj_alert",
       "start_time": 33.2,
@@ -29,11 +36,5 @@
       "reason": "Risk/warning language detected: \"“But if your records are not properly classified, Rev360 can apply BOJ — Best of Judgment — and calculate VAT on total inflows at 7.5%.\""
     }
   ],
-  "unhandled_moments": [
-    {
-      "start_time": 16.0,
-      "sentence": "That ₦7,500 is VAT and must be separated immediately and remitted on or before the 21st of the following month.",
-      "note": "Short/monthly deadline - consider building a matching template later"
-    }
-  ]
+  "unhandled_moments": []
 }
