@@ -1,0 +1,26 @@
+:root {
+  /* Core brand colors */
+  --brand-orange: #FF6B00;
+  --brand-grey: #4A4A4A;
+  --brand-black: #121212;
+  --brand-white: #FFFFFF;
+  --brand-offwhite: #F5F5F5;
+
+  /* Accent colors */
+  --accent-teal: #00A896;
+  --accent-gold: #FFB800;
+  --accent-navy: #1B2430;
+  --accent-green: #2ECC71;
+  --accent-red: #E63946;
+
+  /* Common gradients, ready to drop into background: */
+  --gradient-primary: linear-gradient(135deg, var(--accent-navy), var(--brand-grey));
+  --gradient-highlight: linear-gradient(135deg, var(--brand-orange), var(--accent-gold));
+  --gradient-safe: linear-gradient(135deg, var(--accent-teal), #00796b);
+  --gradient-risk: linear-gradient(135deg, var(--accent-red), var(--brand-orange));
+
+  /* Standard shadows to keep depth consistent across templates */
+  --shadow-highlight: 0 8px 30px rgba(255, 107, 0, 0.45);
+  --shadow-safe: 0 6px 20px rgba(0, 168, 150, 0.4);
+  --shadow-risk: 0 6px 20px rgba(230, 57, 70, 0.4);
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .heading {
+    position:absolute; top:100px; left:50%; transform:translateX(-50%) scale(0.8); opacity:0;
+    font-size:36px; font-weight:800; color:var(--brand-white);
+    background: var(--gradient-primary);
+    padding:16px 32px; border-radius:14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(.22,.68,0,1.01), opacity 0.8s ease;
+  }
+  .heading.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .table { position:absolute; top:220px; left:60px; width:960px; }
+
+  .colHeaders { display:flex; gap:20px; margin-bottom:16px; }
+  .colHeader {
+    flex:1; text-align:center; font-size:26px; font-weight:800; padding:16px;
+    border-radius:12px; color:var(--brand-white); letter-spacing:0.5px;
+  }
+  .colHeader.left {
+    background: var(--gradient-safe);
+    box-shadow: var(--shadow-safe);
+  }
+  .colHeader.right {
+    background: var(--gradient-highlight);
+    box-shadow: var(--shadow-highlight);
+  }
+
+  .row {
+    display:flex; gap:20px; margin-bottom:14px;
+    opacity:0; transform:translateY(20px) scale(0.96);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.22,.68,0,1.01);
+  }
+  .row.show { opacity:1; transform:translateY(0) scale(1); }
+
+  .cell {
+    flex:1; font-size:25px; font-weight:600; color:var(--brand-white);
+    padding:18px 22px; border-radius:10px;
+    background: rgba(18, 18, 18, 0.82);
+  }
+  .cell.left { border-left: 5px solid var(--accent-teal); }
+  .cell.right { border-left: 5px solid var(--brand-orange); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="heading" id="heading">WHAT COUNTS AS VATABLE?</div>
+
+    <div class="table">
+      <div class="colHeaders">
+        <div class="colHeader left">NOT VATABLE</div>
+        <div class="colHeader right">VATABLE</div>
+      </div>
+
+      <div class="row" data-i="0">
+        <div class="cell left">Loans received</div>
+        <div class="cell right">Sale of goods/services</div>
+      </div>
+      <div class="row" data-i="1">
+        <div class="cell left">Transfers between accounts</div>
+        <div class="cell right">Consulting fees</div>
+      </div>
+      <div class="row" data-i="2">
+        <div class="cell left">NGO/diplomatic inflows</div>
+        <div class="cell right">Rental income</div>
+      </div>
+      <div class="row" data-i="3">
+        <div class="cell left">Exports (zero-rated)</div>
+        <div class="cell right">Local commissions</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const heading = document.getElementById('heading');
+  const rows = document.querySelectorAll('.row');
+  const startDelay = 200;
+  const rowStagger = 500;
+
+  setTimeout(() => { heading.classList.add('show'); }, startDelay);
+  rows.forEach((row, i) => {
+    setTimeout(() => { row.classList.add('show'); }, startDelay + 500 + i * rowStagger);
+  });
+</script>
+</body>
+</html>
