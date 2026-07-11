@@ -17,7 +17,7 @@ def build_and_run(scene_json_path):
     output_path = os.path.join(SAMPLES_DIR, spec["output_name"])
     scenes = spec["scenes"]
 
-    cmd = ["ffmpeg", "-i", source_video]
+    cmd = ["ffmpeg", "-y", "-i", source_video]
 
     for scene in scenes:
         frames_path = os.path.join(RENDERER_DIR, scene["frames_folder"], "frame_%04d.png")
@@ -34,7 +34,6 @@ def build_and_run(scene_json_path):
         start = scene["start_time"]
         end = scene["start_time"] + scene["duration"]
         filters.append(f"[{input_index}:v]format=rgba[fg{input_index}]")
-        # enable=... restricts this overlay to only be visible between start and end
         filters.append(
             f"[bg{i}][fg{input_index}]overlay=0:0:enable='between(t,{start},{end})'[bg{input_index}]"
         )
@@ -53,7 +52,8 @@ def build_and_run(scene_json_path):
         "-pix_fmt", "yuv420p",
         "-c:a", "aac",
         "-b:a", "192k",
-        "-t", "50",
+        # No -t limit here anymore - output now runs the full length of the
+        # source video automatically, whatever that length is.
         output_path,
     ]
 

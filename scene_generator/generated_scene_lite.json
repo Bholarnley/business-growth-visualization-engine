@@ -1,39 +1,29 @@
 {
+  "source_video": "new_llc.mp4",
+  "logo": "logo_MJB.jpg",
+  "output_name": "cit_full_test.mp4",
+
   "scenes": [
     {
-      "template": "kpi_counter",
-      "frames_folder": "frames_kpi",
-      "start_time": 10.8,
-      "duration": 3.5,
-      "reason": "Currency amount detected: \"For example, if your service is ₦100,000, your client should be charged ₦107,500.\""
-    },
-    {
-      "template": "deadline_badge",
-      "frames_folder": "frames_deadline_badge",
-      "start_time": 16.0,
-      "duration": 4.0,
-      "reason": "Short/monthly deadline detected: \"That ₦7,500 is VAT and must be separated immediately and remitted on or before the 21st of the following month.\""
-    },
-    {
-      "template": "boj_alert",
-      "frames_folder": "frames_boj_alert",
-      "start_time": 33.2,
-      "duration": 4.0,
-      "reason": "Risk/warning language detected: \"And if you miss filing deadlines, penalties apply — starting from about ₦50,000, plus additional charges and interest depending on delay.”\""
-    },
-    {
-      "template": "boj_alert",
-      "frames_folder": "frames_boj_alert",
+      "template": "cit_timeline",
+      "frames_folder": "frames_cit_timeline",
       "start_time": 41.6,
-      "duration": 4.0,
-      "reason": "Risk/warning language detected: \"“But the real risk is not just penalties.\""
+      "duration": 16.0,
+      "reason": "Multi-month deadline detected: \"For existing companies, your CIT and audited accounts must be filed exactly 6 months after your financial year ends.\""
     },
     {
       "template": "boj_alert",
       "frames_folder": "frames_boj_alert",
-      "start_time": 57.2,
+      "start_time": 58.0,
       "duration": 4.0,
-      "reason": "Risk/warning language detected: \"“But if your records are not properly classified, Rev360 can apply BOJ — Best of Judgment — and calculate VAT on total inflows at 7.5%.\""
+      "reason": "Risk/warning language detected: \"Miss this deadline, and the late filing penalties run into hundreds of thousands of Naira.\"\""
+    },
+    {
+      "template": "before_after_card",
+      "frames_folder": "frames_before_after",
+      "start_time": 64.0,
+      "duration": 4.2,
+      "reason": "Before/after language detected: \"When your bookkeeping is done correctly every month, the audit process becomes a simple formality rather than a financial nightmare.\"\""
     }
   ],
   "unhandled_moments": []

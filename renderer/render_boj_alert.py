@@ -3,11 +3,11 @@ import os
 
 here = os.path.dirname(os.path.abspath(__file__))
 html_path = os.path.join(here, "templates", "boj_alert.html")
-frames_dir = os.path.join(here, "frames")
+frames_dir = os.path.join(here, "frames_boj_alert")
 os.makedirs(frames_dir, exist_ok=True)
 
-FPS = 30           # frames per second
-DURATION = 4        # seconds, matches how long the animation takes to finish
+FPS = 30
+DURATION = 4
 TOTAL_FRAMES = FPS * DURATION
 
 with sync_playwright() as p:
@@ -16,7 +16,6 @@ with sync_playwright() as p:
     page.goto(f"file:///{html_path.replace(os.sep, '/')}")
 
     for i in range(TOTAL_FRAMES):
-        # omit_background=True is what actually gives us a transparent PNG
         page.screenshot(
             path=os.path.join(frames_dir, f"frame_{i:04d}.png"),
             omit_background=True

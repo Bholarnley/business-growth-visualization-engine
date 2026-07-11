@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .caption {
+    position:absolute; top:120px; left:50%;
+    transform:translateX(-50%) translateY(-20px); opacity:0;
+    max-width:880px; text-align:center;
+    font-size:38px; font-weight:700; color:#FFFFFF; line-height:1.4;
+    background: rgba(18,18,18,0.78);
+    padding:24px 36px; border-radius:18px;
+    border-left: 6px solid #FF6B00;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.01);
+  }
+  .caption.show { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="caption" id="caption">Stay compliant, stay stress-free.</div>
+  </div>
+
+<script>
+  const caption = document.getElementById('caption');
+  setTimeout(() => { caption.classList.add('show'); }, 200);
+</script>
+</body>
+</html>

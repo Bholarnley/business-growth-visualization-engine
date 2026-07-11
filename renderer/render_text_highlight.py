@@ -2,12 +2,12 @@ from playwright.sync_api import sync_playwright
 import os
 
 here = os.path.dirname(os.path.abspath(__file__))
-html_path = os.path.join(here, "templates", "cit_timeline.html")
-frames_dir = os.path.join(here, "frames_cit_timeline")
+html_path = os.path.join(here, "templates", "text_highlight.html")
+frames_dir = os.path.join(here, "frames_text_highlight")
 os.makedirs(frames_dir, exist_ok=True)
 
 FPS = 30
-DURATION = 16.0   # matches the real spoken passage: 41s to 57s in your video
+DURATION = 3.0
 TOTAL_FRAMES = int(FPS * DURATION)
 
 with sync_playwright() as p:
