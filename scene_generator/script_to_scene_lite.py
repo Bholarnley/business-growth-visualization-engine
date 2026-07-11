@@ -14,6 +14,8 @@ RISK_WORDS = ["penalty", "penalties", "risk", "boj", "best of judgment",
 COMPARISON_WORDS = ["not all", "are not", "is not", "versus", "vs ", "not the same as"]
 BEFORE_AFTER_WORDS = ["instead of", "used to be", "now becomes", "no longer", "moving from",
                        "rather than", "in the past", "manual", "compared to"]
+GROWTH_WORDS = ["grew", "growth", "increased from", "year over year", "rose from",
+                "over the years", "year-on-year", "climbed to", "doubled", "tripled"]
 
 WORDS_PER_SECOND = 2.5
 
@@ -50,6 +52,7 @@ def estimate_scenes(script_text):
         has_risk = any(w in lower for w in RISK_WORDS)
         has_comparison = any(w in lower for w in COMPARISON_WORDS)
         has_before_after = any(w in lower for w in BEFORE_AFTER_WORDS)
+        has_growth = any(w in lower for w in GROWTH_WORDS)
 
         if has_risk:
             scenes.append({
@@ -75,6 +78,12 @@ def estimate_scenes(script_text):
                 "template": "before_after_card", "frames_folder": "frames_before_after",
                 "start_time": start_time, "duration": 4.2,
                 "reason": f"Before/after language detected: \"{sentence}\"",
+            })
+        elif has_growth:
+            scenes.append({
+                "template": "growth_bar_chart", "frames_folder": "frames_growth_bar",
+                "start_time": start_time, "duration": 4.5,
+                "reason": f"Growth language detected: \"{sentence}\"",
             })
         elif has_comparison:
             scenes.append({

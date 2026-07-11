@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .heading {
+    position:absolute; top:100px; left:50%; transform:translateX(-50%) scale(0.8); opacity:0;
+    font-size:34px; font-weight:800; color:var(--brand-white);
+    background: var(--gradient-primary);
+    padding:16px 32px; border-radius:14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(.22,.68,0,1.01), opacity 0.8s ease;
+  }
+  .heading.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .chart {
+    position:absolute; top:280px; left:80px; width:920px; height:520px;
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:30px;
+  }
+
+  .barGroup {
+    flex:1; height:100%; display:flex; flex-direction:column; align-items:center;
+    justify-content:flex-end; position:relative;
+  }
+
+  .valueLabel {
+    font-size:26px; font-weight:800; color:var(--brand-white);
+    margin-bottom:10px; opacity:0; transition: opacity 0.4s ease;
+  }
+  .valueLabel.show { opacity:1; }
+
+  .bar {
+    width:100%; max-width:130px; height:0%;
+    background: var(--gradient-highlight);
+    border-radius:10px 10px 0 0;
+    box-shadow: var(--shadow-highlight);
+    transition: height 0.9s cubic-bezier(.22,.68,0,1.01);
+  }
+
+  .yearLabel {
+    margin-top:16px; font-size:24px; font-weight:700; color: var(--brand-offwhite);
+    opacity:0; transition: opacity 0.4s ease;
+  }
+  .yearLabel.show { opacity:1; }
+
+  .baseline {
+    position:absolute; bottom:0; left:80px; width:920px; height:4px;
+    background: rgba(255,255,255,0.25); border-radius:2px;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="heading" id="heading">REVENUE GROWTH</div>
+
+    <div class="chart" id="chart">
+      <div class="barGroup">
+        <div class="valueLabel" data-value="₦2.1M">₦2.1M</div>
+        <div class="bar" data-height="35"></div>
+        <div class="yearLabel">2022</div>
+      </div>
+      <div class="barGroup">
+        <div class="valueLabel" data-value="₦3.4M">₦3.4M</div>
+        <div class="bar" data-height="55"></div>
+        <div class="yearLabel">2023</div>
+      </div>
+      <div class="barGroup">
+        <div class="valueLabel" data-value="₦5.8M">₦5.8M</div>
+        <div class="bar" data-height="78"></div>
+        <div class="yearLabel">2024</div>
+      </div>
+      <div class="barGroup">
+        <div class="valueLabel" data-value="₦9.2M">₦9.2M</div>
+        <div class="bar" data-height="100"></div>
+        <div class="yearLabel">2025</div>
+      </div>
+    </div>
+    <div class="baseline"></div>
+  </div>
+
+<script>
+  const heading = document.getElementById('heading');
+  const bars = document.querySelectorAll('.bar');
+  const valueLabels = document.querySelectorAll('.valueLabel');
+  const yearLabels = document.querySelectorAll('.yearLabel');
+
+  const startDelay = 200;
+  const barStagger = 450; // ms between each bar starting to rise
+
+  setTimeout(() => { heading.classList.add('show'); }, startDelay);
+
+  bars.forEach((bar, i) => {
+    const delay = startDelay + 500 + i * barStagger;
+    setTimeout(() => {
+      bar.style.height = bar.dataset.height + '%';
+      yearLabels[i].classList.add('show');
+    }, delay);
+    setTimeout(() => {
+      valueLabels[i].classList.add('show');
+    }, delay + 700); // value pops in just as its bar finishes rising
+  });
+</script>
+</body>
+</html>
