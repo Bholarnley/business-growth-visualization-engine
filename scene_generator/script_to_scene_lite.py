@@ -6,6 +6,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 CURRENCY_PATTERN = re.compile(r'[₦$](\d[\d,]*)')
+PERCENT_PATTERN = re.compile(r'\d+(\.\d+)?\s*%')
 
 MULTI_MONTH_WORDS = ["months after", "months from", "6 months", "months to file"]
 SHORT_DEADLINE_WORDS = ["on or before", "must be remitted", "due by", "the following month"]
@@ -18,6 +19,8 @@ GROWTH_WORDS = ["grew", "growth", "increased from", "year over year", "rose from
                 "over the years", "year-on-year", "climbed to", "doubled", "tripled"]
 PROCESS_WORDS = ["first,", "then,", "next,", "step 1", "step one", "the process",
                   "start by", "followed by", "finally,"]
+GAUGE_WORDS = ["score", "margin", "ratio", "rate of", "percent of businesses",
+               "compliance level"]
 
 WORDS_PER_SECOND = 2.5
 
@@ -49,6 +52,7 @@ def estimate_scenes(script_text):
         lower = sentence.lower()
 
         currency_match = CURRENCY_PATTERN.search(sentence)
+        percent_match = PERCENT_PATTERN.search(sentence)
         has_multi_month = any(w in lower for w in MULTI_MONTH_WORDS)
         has_short_deadline = any(w in lower for w in SHORT_DEADLINE_WORDS)
         has_risk = any(w in lower for w in RISK_WORDS)
@@ -56,6 +60,7 @@ def estimate_scenes(script_text):
         has_before_after = any(w in lower for w in BEFORE_AFTER_WORDS)
         has_growth = any(w in lower for w in GROWTH_WORDS)
         has_process = any(w in lower for w in PROCESS_WORDS)
+        has_gauge = any(w in lower for w in GAUGE_WORDS) and percent_match
 
         if has_risk:
             scenes.append({
@@ -81,6 +86,12 @@ def estimate_scenes(script_text):
                 "template": "process_flow", "frames_folder": "frames_process_flow",
                 "start_time": start_time, "duration": 4.8,
                 "reason": f"Process/step language detected: \"{sentence}\"",
+            })
+        elif has_gauge:
+            scenes.append({
+                "template": "gauge_meter", "frames_folder": "frames_gauge_meter",
+                "start_time": start_time, "duration": 3.8,
+                "reason": f"Ratio/score language detected: \"{sentence}\"",
             })
         elif has_before_after:
             scenes.append({

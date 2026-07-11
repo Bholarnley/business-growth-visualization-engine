@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .heading {
+    position:absolute; top:100px; left:50%; transform:translateX(-50%) scale(0.8); opacity:0;
+    font-size:34px; font-weight:800; color:var(--brand-white);
+    background: var(--gradient-primary);
+    padding:16px 32px; border-radius:14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(.22,.68,0,1.01), opacity 0.8s ease;
+  }
+  .heading.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .gaugeWrap {
+    position:absolute; top:300px; left:50%; transform:translateX(-50%);
+    width:700px; height:460px; opacity:0; transition: opacity 0.6s ease;
+  }
+  .gaugeWrap.show { opacity:1; }
+
+  .gaugeValue {
+    position:absolute; top:230px; left:50%; transform:translateX(-50%);
+    font-size:88px; font-weight:800;
+    background: var(--gradient-highlight);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .gaugeSub {
+    position:absolute; top:340px; left:50%; transform:translateX(-50%);
+    font-size:28px; font-weight:700; color:var(--brand-white); text-align:center; width:640px;
+    background: rgba(18,18,18,0.75); padding:14px 20px; border-radius:12px;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="heading" id="heading">COMPLIANCE SCORE</div>
+
+    <div class="gaugeWrap" id="gaugeWrap">
+      <svg width="700" height="400" viewBox="0 0 700 400">
+        <path d="M 60 350 A 290 290 0 0 1 640 350" fill="none"
+              stroke="rgba(255,255,255,0.12)" stroke-width="36" stroke-linecap="round"/>
+        <path id="arc" d="M 60 350 A 290 290 0 0 1 640 350" fill="none"
+              stroke="url(#gaugeGradient)" stroke-width="36" stroke-linecap="round"
+              stroke-dasharray="911" stroke-dashoffset="911"
+              style="transition: stroke-dashoffset 2.2s cubic-bezier(.22,.68,0,1.01);"/>
+        <defs>
+          <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00A896"/>
+            <stop offset="100%" stop-color="#FFB800"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="gaugeValue" id="gaugeValue">0%</div>
+      <div class="gaugeSub">of businesses properly classify VATable income</div>
+    </div>
+  </div>
+
+<script>
+  const heading = document.getElementById('heading');
+  const gaugeWrap = document.getElementById('gaugeWrap');
+  const arc = document.getElementById('arc');
+  const gaugeValue = document.getElementById('gaugeValue');
+
+  const targetPercent = 42;
+  const arcLength = 911;
+  const startDelay = 200;
+
+  setTimeout(() => { heading.classList.add('show'); }, startDelay);
+
+  setTimeout(() => {
+    gaugeWrap.classList.add('show');
+    const offset = arcLength - (arcLength * targetPercent / 100);
+    arc.style.strokeDashoffset = offset;
+
+    // Slowed to 2200ms (matches the arc's own transition time) so the
+    // number climbing is clearly visible alongside the arc sweep, not instant.
+    const duration = 2200;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      gaugeValue.textContent = Math.floor(eased * targetPercent) + '%';
+      if (progress < 1) requestAnimationFrame(tick);
+      else gaugeValue.textContent = targetPercent + '%';
+    }
+    requestAnimationFrame(tick);
+  }, startDelay + 500);
+</script>
+</body>
+</html>
