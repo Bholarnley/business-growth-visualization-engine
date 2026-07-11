@@ -12,6 +12,8 @@ MULTI_MONTH_WORDS = ["months after", "months from", "6 months", "months to file"
 SHORT_DEADLINE_WORDS = ["on or before", "must be remitted", "due by", "the following month"]
 RISK_WORDS = ["penalty", "penalties", "risk", "boj", "best of judgment",
               "non-compliant", "warning", "fine"]
+MYTH_WORDS = ["the biggest fear", "the truth is", "but here's the truth", "the mistake",
+              "myth", "most people think", "the misconception"]
 EXPANSION_WORDS = ["states", "branches", "locations", "expanded to", "expansion",
                     "across the country", "multiple cities", "new markets"]
 COMPARISON_WORDS = ["not all", "are not", "is not", "versus", "vs ", "not the same as"]
@@ -60,6 +62,7 @@ def estimate_scenes(script_text):
         has_multi_month = any(w in lower for w in MULTI_MONTH_WORDS)
         has_short_deadline = any(w in lower for w in SHORT_DEADLINE_WORDS)
         has_risk = any(w in lower for w in RISK_WORDS)
+        has_myth = any(w in lower for w in MYTH_WORDS)
         has_expansion = any(w in lower for w in EXPANSION_WORDS)
         has_comparison = any(w in lower for w in COMPARISON_WORDS)
         has_before_after = any(w in lower for w in BEFORE_AFTER_WORDS)
@@ -86,6 +89,12 @@ def estimate_scenes(script_text):
                 "template": "cit_timeline", "frames_folder": "frames_cit_timeline",
                 "start_time": start_time, "duration": round(duration, 1),
                 "reason": f"Multi-month deadline detected: \"{sentence}\"",
+            })
+        elif has_myth:
+            scenes.append({
+                "template": "myth_fact_reveal", "frames_folder": "frames_myth_fact",
+                "start_time": start_time, "duration": 4.0,
+                "reason": f"Myth/correction language detected: \"{sentence}\"",
             })
         elif has_expansion:
             scenes.append({
