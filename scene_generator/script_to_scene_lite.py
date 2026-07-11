@@ -16,6 +16,8 @@ BEFORE_AFTER_WORDS = ["instead of", "used to be", "now becomes", "no longer", "m
                        "rather than", "in the past", "manual", "compared to"]
 GROWTH_WORDS = ["grew", "growth", "increased from", "year over year", "rose from",
                 "over the years", "year-on-year", "climbed to", "doubled", "tripled"]
+PROCESS_WORDS = ["first,", "then,", "next,", "step 1", "step one", "the process",
+                  "start by", "followed by", "finally,"]
 
 WORDS_PER_SECOND = 2.5
 
@@ -53,6 +55,7 @@ def estimate_scenes(script_text):
         has_comparison = any(w in lower for w in COMPARISON_WORDS)
         has_before_after = any(w in lower for w in BEFORE_AFTER_WORDS)
         has_growth = any(w in lower for w in GROWTH_WORDS)
+        has_process = any(w in lower for w in PROCESS_WORDS)
 
         if has_risk:
             scenes.append({
@@ -72,6 +75,12 @@ def estimate_scenes(script_text):
                 "template": "cit_timeline", "frames_folder": "frames_cit_timeline",
                 "start_time": start_time, "duration": round(duration, 1),
                 "reason": f"Multi-month deadline detected: \"{sentence}\"",
+            })
+        elif has_process:
+            scenes.append({
+                "template": "process_flow", "frames_folder": "frames_process_flow",
+                "start_time": start_time, "duration": 4.8,
+                "reason": f"Process/step language detected: \"{sentence}\"",
             })
         elif has_before_after:
             scenes.append({
