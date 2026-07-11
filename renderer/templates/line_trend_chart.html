@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .heading {
+    position:absolute; top:100px; left:50%; transform:translateX(-50%) scale(0.8); opacity:0;
+    font-size:34px; font-weight:800; color:var(--brand-white);
+    background: var(--gradient-primary);
+    padding:16px 32px; border-radius:14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(.22,.68,0,1.01), opacity 0.8s ease;
+  }
+  .heading.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .chartWrap {
+    position:absolute; top:280px; left:70px; width:940px; height:560px;
+  }
+
+  .gridLine {
+    position:absolute; left:0; width:100%; height:1px; background:rgba(255,255,255,0.12);
+  }
+
+  .pointLabel {
+    position:absolute; font-size:24px; font-weight:800; color:var(--brand-white);
+    background: rgba(18,18,18,0.8); padding:6px 14px; border-radius:8px;
+    opacity:0; transform:translate(-50%,-140%); transition: opacity 0.4s ease;
+  }
+  .pointLabel.show { opacity:1; }
+
+  .xLabel {
+    position:absolute; top:576px; font-size:22px; color:var(--brand-offwhite); font-weight:600;
+    transform:translateX(-50%); opacity:0; transition: opacity 0.4s ease;
+  }
+  .xLabel.show { opacity:1; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="heading" id="heading">EXCHANGE RATE TREND</div>
+
+    <div class="chartWrap">
+      <div class="gridLine" style="top:0"></div>
+      <div class="gridLine" style="top:140px"></div>
+      <div class="gridLine" style="top:280px"></div>
+      <div class="gridLine" style="top:420px"></div>
+      <div class="gridLine" style="top:560px"></div>
+
+      <svg width="940" height="560" style="position:absolute; top:0; left:0;">
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00A896"/>
+            <stop offset="100%" stop-color="#FF6B00"/>
+          </linearGradient>
+        </defs>
+        <polyline id="trendLine" fill="none" stroke="url(#lineGradient)" stroke-width="7"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  points="30,470 250,380 470,300 690,190 910,60"
+                  stroke-dasharray="1300" stroke-dashoffset="1300"
+                  style="transition: stroke-dashoffset 2.4s cubic-bezier(.22,.68,0,1.01);"/>
+        <circle class="dot" cx="30" cy="470" r="10" fill="#00A896" opacity="0"/>
+        <circle class="dot" cx="250" cy="380" r="10" fill="#FF6B00" opacity="0"/>
+        <circle class="dot" cx="470" cy="300" r="10" fill="#FF6B00" opacity="0"/>
+        <circle class="dot" cx="690" cy="190" r="10" fill="#FF6B00" opacity="0"/>
+        <circle class="dot" cx="910" cy="60" r="10" fill="#FF6B00" opacity="0"/>
+      </svg>
+
+      <div class="pointLabel" style="left:30px; top:470px;" data-i="0">₦460</div>
+      <div class="pointLabel" style="left:250px; top:380px;" data-i="1">₦620</div>
+      <div class="pointLabel" style="left:470px; top:300px;" data-i="2">₦780</div>
+      <div class="pointLabel" style="left:690px; top:190px;" data-i="3">₦980</div>
+      <div class="pointLabel" style="left:910px; top:60px;" data-i="4">₦1,250</div>
+
+      <div class="xLabel" style="left:30px;" data-i="0">2021</div>
+      <div class="xLabel" style="left:250px;" data-i="1">2022</div>
+      <div class="xLabel" style="left:470px;" data-i="2">2023</div>
+      <div class="xLabel" style="left:690px;" data-i="3">2024</div>
+      <div class="xLabel" style="left:910px;" data-i="4">2025</div>
+    </div>
+  </div>
+
+<script>
+  const heading = document.getElementById('heading');
+  const trendLine = document.getElementById('trendLine');
+  const dots = document.querySelectorAll('.dot');
+  const pointLabels = document.querySelectorAll('.pointLabel');
+  const xLabels = document.querySelectorAll('.xLabel');
+
+  const startDelay = 200;
+  const lineDrawDelay = 700;
+  const lineDrawDuration = 2400;
+
+  setTimeout(() => { heading.classList.add('show'); }, startDelay);
+
+  setTimeout(() => {
+    trendLine.style.strokeDashoffset = 0;
+  }, startDelay + lineDrawDelay);
+
+  // Reveal each point's dot and label timed to roughly when the drawing
+  // line would have reached that x-position, so labels appear "as the line gets there"
+  dots.forEach((dot, i) => {
+    const pointDelay = startDelay + lineDrawDelay + (lineDrawDuration / (dots.length - 1)) * i;
+    setTimeout(() => {
+      dot.setAttribute('opacity', '1');
+      pointLabels[i].classList.add('show');
+      xLabels[i].classList.add('show');
+    }, pointDelay);
+  });
+</script>
+</body>
+</html>

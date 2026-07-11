@@ -15,6 +15,8 @@ RISK_WORDS = ["penalty", "penalties", "risk", "boj", "best of judgment",
 COMPARISON_WORDS = ["not all", "are not", "is not", "versus", "vs ", "not the same as"]
 BEFORE_AFTER_WORDS = ["instead of", "used to be", "now becomes", "no longer", "moving from",
                        "rather than", "in the past", "manual", "compared to"]
+TREND_WORDS = ["exchange rate", "inflation", "cost of living", "naira depreciated",
+               "price of", "trend", "over the past years"]
 GROWTH_WORDS = ["grew", "growth", "increased from", "year over year", "rose from",
                 "over the years", "year-on-year", "climbed to", "doubled", "tripled"]
 PROCESS_WORDS = ["first,", "then,", "next,", "step 1", "step one", "the process",
@@ -58,6 +60,7 @@ def estimate_scenes(script_text):
         has_risk = any(w in lower for w in RISK_WORDS)
         has_comparison = any(w in lower for w in COMPARISON_WORDS)
         has_before_after = any(w in lower for w in BEFORE_AFTER_WORDS)
+        has_trend = any(w in lower for w in TREND_WORDS)
         has_growth = any(w in lower for w in GROWTH_WORDS)
         has_process = any(w in lower for w in PROCESS_WORDS)
         has_gauge = any(w in lower for w in GAUGE_WORDS) and percent_match
@@ -90,8 +93,14 @@ def estimate_scenes(script_text):
         elif has_gauge:
             scenes.append({
                 "template": "gauge_meter", "frames_folder": "frames_gauge_meter",
-                "start_time": start_time, "duration": 3.8,
+                "start_time": start_time, "duration": 4.2,
                 "reason": f"Ratio/score language detected: \"{sentence}\"",
+            })
+        elif has_trend:
+            scenes.append({
+                "template": "line_trend_chart", "frames_folder": "frames_line_trend",
+                "start_time": start_time, "duration": 4.5,
+                "reason": f"Trend/rate language detected: \"{sentence}\"",
             })
         elif has_before_after:
             scenes.append({

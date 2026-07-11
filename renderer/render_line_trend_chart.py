@@ -2,12 +2,12 @@ from playwright.sync_api import sync_playwright
 import os
 
 here = os.path.dirname(os.path.abspath(__file__))
-html_path = os.path.join(here, "templates", "deadline_badge.html")
-frames_dir = os.path.join(here, "frames_deadline_badge")
+html_path = os.path.join(here, "templates", "line_trend_chart.html")
+frames_dir = os.path.join(here, "frames_line_trend")
 os.makedirs(frames_dir, exist_ok=True)
 
 FPS = 30
-DURATION = 4.0
+DURATION = 4.5
 TOTAL_FRAMES = int(FPS * DURATION)
 
 with sync_playwright() as p:
@@ -21,4 +21,4 @@ with sync_playwright() as p:
 
     browser.close()
 
-print(f"Captured {TOTAL_FRAMES} frames into: {frames_dir}")s
+print(f"Captured {TOTAL_FRAMES} frames into: {frames_dir}")
