@@ -14,6 +14,8 @@ RISK_WORDS = ["penalty", "penalties", "risk", "boj", "best of judgment",
               "non-compliant", "warning", "fine"]
 MYTH_WORDS = ["the biggest fear", "the truth is", "but here's the truth", "the mistake",
               "myth", "most people think", "the misconception"]
+RISING_COST_WORDS = ["rent, fuel", "costs have increased", "operating costs",
+                      "business costs", "rising costs"]
 EXPANSION_WORDS = ["states", "branches", "locations", "expanded to", "expansion",
                     "across the country", "multiple cities", "new markets"]
 COMPARISON_WORDS = ["not all", "are not", "is not", "versus", "vs ", "not the same as"]
@@ -63,6 +65,7 @@ def estimate_scenes(script_text):
         has_short_deadline = any(w in lower for w in SHORT_DEADLINE_WORDS)
         has_risk = any(w in lower for w in RISK_WORDS)
         has_myth = any(w in lower for w in MYTH_WORDS)
+        has_rising_costs = any(w in lower for w in RISING_COST_WORDS)
         has_expansion = any(w in lower for w in EXPANSION_WORDS)
         has_comparison = any(w in lower for w in COMPARISON_WORDS)
         has_before_after = any(w in lower for w in BEFORE_AFTER_WORDS)
@@ -95,6 +98,12 @@ def estimate_scenes(script_text):
                 "template": "myth_fact_reveal", "frames_folder": "frames_myth_fact",
                 "start_time": start_time, "duration": 4.0,
                 "reason": f"Myth/correction language detected: \"{sentence}\"",
+            })
+        elif has_rising_costs:
+            scenes.append({
+                "template": "rising_costs_list", "frames_folder": "frames_rising_costs",
+                "start_time": start_time, "duration": 4.2,
+                "reason": f"Rising costs language detected: \"{sentence}\"",
             })
         elif has_expansion:
             scenes.append({
