@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .shakeWrap {
+    position:absolute; top:760px; left:50%;
+    transform: translateX(-50%) scale(0);
+    transition: transform 0.5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .shakeWrap.show { transform: translateX(-50%) scale(1); }
+  .shakeWrap.shaking { animation: shakeMove 0.45s ease-in-out; }
+  .shakeWrap.pulsing { animation: pulseGlow 1.4s ease-in-out infinite; }
+
+  @keyframes shakeMove {
+    0%,100% { transform: translateX(-50%) scale(1); }
+    20% { transform: translateX(calc(-50% - 14px)) scale(1); }
+    40% { transform: translateX(calc(-50% + 12px)) scale(1); }
+    60% { transform: translateX(calc(-50% - 8px)) scale(1); }
+    80% { transform: translateX(calc(-50% + 5px)) scale(1); }
+  }
+  @keyframes pulseGlow {
+    0%,100% { filter: drop-shadow(0 0 0px rgba(230,57,70,0.6)); }
+    50% { filter: drop-shadow(0 0 30px rgba(230,57,70,0.8)); }
+  }
+
+  .triangle svg { width:280px; height:280px; }
+
+  .warnLabel {
+    position:absolute; top:1070px; left:50%; transform:translateX(-50%) translateY(15px);
+    font-size:38px; font-weight:800; color:#FFFFFF; text-align:center;
+    background: rgba(18,18,18,0.82); padding:16px 32px; border-radius:14px;
+    opacity:0; transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .warnLabel.show { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="shakeWrap" id="shakeWrap">
+      <div class="triangle">
+        <svg viewBox="0 0 24 24" fill="#E63946" stroke="#FFFFFF" stroke-width="0.6">
+          <path d="M12 2 L23 21 L1 21 Z"/>
+          <rect x="11" y="9" width="2" height="6" fill="#FFFFFF"/>
+          <circle cx="12" cy="17.5" r="1.2" fill="#FFFFFF"/>
+        </svg>
+      </div>
+    </div>
+    <div class="warnLabel" id="warnLabel">BIG MISTAKE</div>
+  </div>
+
+<script>
+  const shakeWrap = document.getElementById('shakeWrap');
+  const warnLabel = document.getElementById('warnLabel');
+
+  setTimeout(() => { shakeWrap.classList.add('show'); }, 200);
+  setTimeout(() => { shakeWrap.classList.add('shaking'); }, 700);
+  setTimeout(() => { shakeWrap.classList.add('pulsing'); }, 1150);
+  setTimeout(() => { warnLabel.classList.add('show'); }, 1000);
+</script>
+</body>
+</html>

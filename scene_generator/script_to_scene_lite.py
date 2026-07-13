@@ -31,6 +31,7 @@ GAUGE_WORDS = ["score", "margin", "ratio", "rate of", "percent of businesses",
                "compliance level"]
 
 WORDS_PER_SECOND = 2.5
+MIN_HIGHLIGHT_WORDS = 6
 
 SECTION_HEADER_PATTERN = re.compile(r'\[[^\]]*\]')
 
@@ -50,7 +51,6 @@ def clean_and_split(script_text):
 def estimate_scenes(script_text):
     sentences = clean_and_split(script_text)
     scenes = []
-    unhandled_moments = []
     elapsed_seconds = 0.0
 
     for sentence in sentences:
@@ -75,88 +75,66 @@ def estimate_scenes(script_text):
         has_gauge = any(w in lower for w in GAUGE_WORDS) and percent_match
 
         if has_risk:
-            scenes.append({
-                "template": "boj_alert", "frames_folder": "frames_boj_alert",
+            scenes.append({"template": "boj_alert", "frames_folder": "frames_boj_alert",
                 "start_time": start_time, "duration": 4.0,
-                "reason": f"Risk/warning language detected: \"{sentence}\"",
-            })
+                "reason": f"Risk/warning language detected: \"{sentence}\""})
         elif has_short_deadline:
-            scenes.append({
-                "template": "deadline_badge", "frames_folder": "frames_deadline_badge",
+            scenes.append({"template": "deadline_badge", "frames_folder": "frames_deadline_badge",
                 "start_time": start_time, "duration": 4.0,
-                "reason": f"Short/monthly deadline detected: \"{sentence}\"",
-            })
+                "reason": f"Short/monthly deadline detected: \"{sentence}\""})
         elif has_multi_month:
             duration = max(sentence_duration, 6.0)
-            scenes.append({
-                "template": "cit_timeline", "frames_folder": "frames_cit_timeline",
+            scenes.append({"template": "cit_timeline", "frames_folder": "frames_cit_timeline",
                 "start_time": start_time, "duration": round(duration, 1),
-                "reason": f"Multi-month deadline detected: \"{sentence}\"",
-            })
+                "reason": f"Multi-month deadline detected: \"{sentence}\""})
         elif has_myth:
-            scenes.append({
-                "template": "myth_fact_reveal", "frames_folder": "frames_myth_fact",
+            scenes.append({"template": "myth_fact_reveal", "frames_folder": "frames_myth_fact",
                 "start_time": start_time, "duration": 4.0,
-                "reason": f"Myth/correction language detected: \"{sentence}\"",
-            })
+                "reason": f"Myth/correction language detected: \"{sentence}\""})
         elif has_rising_costs:
-            scenes.append({
-                "template": "rising_costs_list", "frames_folder": "frames_rising_costs",
+            scenes.append({"template": "rising_costs_list", "frames_folder": "frames_rising_costs",
                 "start_time": start_time, "duration": 4.2,
-                "reason": f"Rising costs language detected: \"{sentence}\"",
-            })
+                "reason": f"Rising costs language detected: \"{sentence}\""})
         elif has_expansion:
-            scenes.append({
-                "template": "expansion_map", "frames_folder": "frames_expansion_map",
+            scenes.append({"template": "expansion_map", "frames_folder": "frames_expansion_map",
                 "start_time": start_time, "duration": 5.0,
-                "reason": f"Expansion/location language detected: \"{sentence}\"",
-            })
+                "reason": f"Expansion/location language detected: \"{sentence}\""})
         elif has_process:
-            scenes.append({
-                "template": "process_flow", "frames_folder": "frames_process_flow",
+            scenes.append({"template": "process_flow", "frames_folder": "frames_process_flow",
                 "start_time": start_time, "duration": 4.8,
-                "reason": f"Process/step language detected: \"{sentence}\"",
-            })
+                "reason": f"Process/step language detected: \"{sentence}\""})
         elif has_gauge:
-            scenes.append({
-                "template": "gauge_meter", "frames_folder": "frames_gauge_meter",
+            scenes.append({"template": "gauge_meter", "frames_folder": "frames_gauge_meter",
                 "start_time": start_time, "duration": 4.2,
-                "reason": f"Ratio/score language detected: \"{sentence}\"",
-            })
+                "reason": f"Ratio/score language detected: \"{sentence}\""})
         elif has_trend:
-            scenes.append({
-                "template": "line_trend_chart", "frames_folder": "frames_line_trend",
+            scenes.append({"template": "line_trend_chart", "frames_folder": "frames_line_trend",
                 "start_time": start_time, "duration": 4.5,
-                "reason": f"Trend/rate language detected: \"{sentence}\"",
-            })
+                "reason": f"Trend/rate language detected: \"{sentence}\""})
         elif has_before_after:
-            scenes.append({
-                "template": "before_after_card", "frames_folder": "frames_before_after",
+            scenes.append({"template": "before_after_card", "frames_folder": "frames_before_after",
                 "start_time": start_time, "duration": 4.2,
-                "reason": f"Before/after language detected: \"{sentence}\"",
-            })
+                "reason": f"Before/after language detected: \"{sentence}\""})
         elif has_growth:
-            scenes.append({
-                "template": "growth_bar_chart", "frames_folder": "frames_growth_bar",
+            scenes.append({"template": "growth_bar_chart", "frames_folder": "frames_growth_bar",
                 "start_time": start_time, "duration": 4.5,
-                "reason": f"Growth language detected: \"{sentence}\"",
-            })
+                "reason": f"Growth language detected: \"{sentence}\""})
         elif has_comparison:
-            scenes.append({
-                "template": "comparison_table", "frames_folder": "frames_comparison_table",
+            scenes.append({"template": "comparison_table", "frames_folder": "frames_comparison_table",
                 "start_time": start_time, "duration": 4.5,
-                "reason": f"Comparison language detected: \"{sentence}\"",
-            })
+                "reason": f"Comparison language detected: \"{sentence}\""})
         elif currency_match:
-            scenes.append({
-                "template": "kpi_counter", "frames_folder": "frames_kpi",
+            scenes.append({"template": "kpi_counter", "frames_folder": "frames_kpi",
                 "start_time": start_time, "duration": 3.5,
-                "reason": f"Currency amount detected: \"{sentence}\"",
-            })
+                "reason": f"Currency amount detected: \"{sentence}\""})
+        elif word_count >= MIN_HIGHLIGHT_WORDS:
+            scenes.append({"template": "text_highlight", "frames_folder": "frames_text_highlight",
+                "start_time": start_time, "duration": 3.0,
+                "reason": f"General narrative sentence (fallback caption): \"{sentence}\""})
 
         elapsed_seconds += sentence_duration
 
-    return {"scenes": scenes, "unhandled_moments": unhandled_moments}
+    return {"scenes": scenes}
 
 
 if __name__ == "__main__":
