@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .cardWrap {
+    position:absolute; top:100px; left:90px; width:900px; height:640px;
+    border-radius:22px; overflow:hidden;
+    background: linear-gradient(160deg, #1B2430, #121212);
+    box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+    opacity:0; transform:translateY(-30px) scale(0.96);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.01);
+  }
+  .cardWrap.show { opacity:1; transform:translateY(0) scale(1); }
+
+  .header {
+    padding:26px 32px 18px; border-bottom:2px solid rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .headerTitle { font-size:28px; font-weight:800; color:#FFFFFF; }
+  .headerTag {
+    font-size:18px; font-weight:700; color:#FF6B00;
+    background: rgba(255,107,0,0.12); padding:6px 14px; border-radius:8px;
+  }
+
+  .scrollMask { position:relative; height:520px; overflow:hidden; }
+
+  .scrollTrack {
+    position:absolute; top:0; left:0; width:100%;
+    display:flex; flex-direction:column;
+    transform: translateY(0);
+    transition: transform 6s linear;
+  }
+  .scrollTrack.scroll { transform: translateY(-620px); }
+
+  .row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 32px; border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .rowLeft { display:flex; flex-direction:column; }
+  .rowDesc { font-size:24px; font-weight:600; color:#FFFFFF; }
+  .rowDate { font-size:18px; color:rgba(255,255,255,0.45); margin-top:4px; }
+  .rowAmount { font-size:26px; font-weight:800; }
+  .rowAmount.credit { color:#2ECC71; }
+  .rowAmount.debit { color:#E63946; }
+
+  .fadeTop, .fadeBottom {
+    position:absolute; left:0; width:100%; height:60px; pointer-events:none; z-index:2;
+  }
+  .fadeTop { top:0; background: linear-gradient(180deg, #121212, transparent); }
+  .fadeBottom { bottom:0; background: linear-gradient(0deg, #121212, transparent); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="cardWrap" id="cardWrap">
+      <div class="header">
+        <div class="headerTitle">Bank Statement</div>
+        <div class="headerTag">GTB •••• 4521</div>
+      </div>
+      <div class="scrollMask">
+        <div class="fadeTop"></div>
+        <div class="scrollTrack" id="scrollTrack">
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Client Payment - ABC Ltd</div><div class="rowDate">3 Jun</div></div><div class="rowAmount credit">+₦180,000</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Office Rent</div><div class="rowDate">4 Jun</div></div><div class="rowAmount debit">-₦95,000</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Consulting Fee</div><div class="rowDate">6 Jun</div></div><div class="rowAmount credit">+₦240,000</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Fuel & Transport</div><div class="rowDate">9 Jun</div></div><div class="rowAmount debit">-₦32,000</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Staff Salary</div><div class="rowDate">10 Jun</div></div><div class="rowAmount debit">-₦310,000</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Loan Disbursement</div><div class="rowDate">12 Jun</div></div><div class="rowAmount credit">+₦500,000</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Internet Subscription</div><div class="rowDate">14 Jun</div></div><div class="rowAmount debit">-₦18,000</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Product Sales</div><div class="rowDate">15 Jun</div></div><div class="rowAmount credit">+₦95,500</div></div>
+        </div>
+        <div class="fadeBottom"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const cardWrap = document.getElementById('cardWrap');
+  const scrollTrack = document.getElementById('scrollTrack');
+
+  setTimeout(() => { cardWrap.classList.add('show'); }, 200);
+  setTimeout(() => { scrollTrack.classList.add('scroll'); }, 900);
+</script>
+</body>
+</html>
