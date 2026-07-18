@@ -48,9 +48,18 @@
   .rowLeft { display:flex; flex-direction:column; }
   .rowDesc { font-size:24px; font-weight:600; color:#FFFFFF; }
   .rowDate { font-size:18px; color:rgba(255,255,255,0.45); margin-top:4px; }
+
+  .rowRight { display:flex; flex-direction:column; align-items:flex-end; }
   .rowAmount { font-size:26px; font-weight:800; }
   .rowAmount.credit { color:#2ECC71; }
   .rowAmount.debit { color:#E63946; }
+
+  .rowTag {
+    font-size:15px; font-weight:800; letter-spacing:1px; margin-top:4px;
+    padding:3px 10px; border-radius:6px;
+  }
+  .rowTag.credit { color:#2ECC71; background: rgba(46,204,113,0.14); }
+  .rowTag.debit { color:#E63946; background: rgba(230,57,70,0.14); }
 
   .fadeTop, .fadeBottom {
     position:absolute; left:0; width:100%; height:60px; pointer-events:none; z-index:2;
@@ -69,14 +78,14 @@
       <div class="scrollMask">
         <div class="fadeTop"></div>
         <div class="scrollTrack" id="scrollTrack">
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Client Payment - ABC Ltd</div><div class="rowDate">3 Jun</div></div><div class="rowAmount credit">+₦180,000</div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Office Rent</div><div class="rowDate">4 Jun</div></div><div class="rowAmount debit">-₦95,000</div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Consulting Fee</div><div class="rowDate">6 Jun</div></div><div class="rowAmount credit">+₦240,000</div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Fuel & Transport</div><div class="rowDate">9 Jun</div></div><div class="rowAmount debit">-₦32,000</div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Staff Salary</div><div class="rowDate">10 Jun</div></div><div class="rowAmount debit">-₦310,000</div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Loan Disbursement</div><div class="rowDate">12 Jun</div></div><div class="rowAmount credit">+₦500,000</div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Internet Subscription</div><div class="rowDate">14 Jun</div></div><div class="rowAmount debit">-₦18,000</div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Product Sales</div><div class="rowDate">15 Jun</div></div><div class="rowAmount credit">+₦95,500</div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Client Payment - ABC Ltd</div><div class="rowDate">3 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦180,000</div><div class="rowTag credit">CREDIT</div></div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Office Rent</div><div class="rowDate">4 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦95,000</div><div class="rowTag debit">DEBIT</div></div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Consulting Fee</div><div class="rowDate">6 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦240,000</div><div class="rowTag credit">CREDIT</div></div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Fuel & Transport</div><div class="rowDate">9 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦32,000</div><div class="rowTag debit">DEBIT</div></div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Staff Salary</div><div class="rowDate">10 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦310,000</div><div class="rowTag debit">DEBIT</div></div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Loan Disbursement</div><div class="rowDate">12 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦500,000</div><div class="rowTag credit">CREDIT</div></div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Internet Subscription</div><div class="rowDate">14 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦18,000</div><div class="rowTag debit">DEBIT</div></div></div>
+          <div class="row"><div class="rowLeft"><div class="rowDesc">Product Sales</div><div class="rowDate">15 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦95,500</div><div class="rowTag credit">CREDIT</div></div></div>
         </div>
         <div class="fadeBottom"></div>
       </div>
