@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .heading {
+    position:absolute; top:100px; left:50%; transform:translateX(-50%) scale(0.8); opacity:0;
+    font-size:34px; font-weight:800; color:#FFFFFF;
+    background: linear-gradient(135deg, #1B2430, #4A4A4A);
+    padding:16px 32px; border-radius:14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(.22,.68,0,1.01), opacity 0.8s ease;
+  }
+  .heading.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .buckets { position:absolute; top:900px; left:70px; width:940px; display:flex; gap:30px; }
+  .bucket {
+    flex:1; height:520px; border-radius:20px; padding:20px;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .bucket.left { background: rgba(46,204,113,0.10); border:2px dashed rgba(46,204,113,0.4); }
+  .bucket.right { background: rgba(230,57,70,0.10); border:2px dashed rgba(230,57,70,0.4); }
+  .bucketLabel { font-size:24px; font-weight:800; margin-bottom:16px; }
+  .bucket.left .bucketLabel { color:#2ECC71; }
+  .bucket.right .bucketLabel { color:#E63946; }
+
+  .card {
+    position:absolute; width:220px; padding:16px 18px; border-radius:12px;
+    background: rgba(18,18,18,0.9); font-size:20px; font-weight:700; color:#FFFFFF;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: top 1s cubic-bezier(.22,.68,0,1.01), left 1s cubic-bezier(.22,.68,0,1.01), transform 1s ease;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="heading" id="heading">SORTING YOUR TRANSACTIONS</div>
+
+    <div class="card" id="card0" style="top:300px; left:130px;">Office Rent - ₦95,000</div>
+    <div class="card" id="card1" style="top:400px; left:700px;">Client Lunch - ₦12,000</div>
+    <div class="card" id="card2" style="top:500px; left:250px;">Software Subscription - ₦18,000</div>
+    <div class="card" id="card3" style="top:350px; left:600px;">Family Gift - ₦25,000</div>
+
+    <div class="buckets">
+      <div class="bucket left"><div class="bucketLabel">BUSINESS EXPENSE</div></div>
+      <div class="bucket right"><div class="bucketLabel">NOT DEDUCTIBLE</div></div>
+    </div>
+  </div>
+
+<script>
+  const heading = document.getElementById('heading');
+  const cards = [
+    { el: document.getElementById('card0'), target: { top: 980, left: 130 } },   // business
+    { el: document.getElementById('card1'), target: { top: 1080, left: 660 } },  // not deductible
+    { el: document.getElementById('card2'), target: { top: 1180, left: 130 } },  // business
+    { el: document.getElementById('card3'), target: { top: 980, left: 660 } },   // not deductible
+  ];
+
+  setTimeout(() => { heading.classList.add('show'); }, 200);
+
+  cards.forEach((card, i) => {
+    setTimeout(() => {
+      card.el.style.top = card.target.top + 'px';
+      card.el.style.left = card.target.left + 'px';
+    }, 900 + i * 400);
+  });
+</script>
+</body>
+</html>
