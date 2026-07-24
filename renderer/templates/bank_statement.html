@@ -12,92 +12,75 @@
   .stage { position:relative; width:1080px; height:1920px; }
 
   .cardWrap {
-    position:absolute; top:100px; left:90px; width:900px; height:640px;
-    border-radius:22px; overflow:hidden;
+    position:absolute; top:120px; left:90px; width:900px; height:420px;
+    border-radius:24px; overflow:visible;
     background: linear-gradient(160deg, #1B2430, #121212);
     box-shadow: 0 16px 50px rgba(0,0,0,0.5);
-    opacity:0; transform:translateY(-30px) scale(0.96);
-    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.01);
   }
-  .cardWrap.show { opacity:1; transform:translateY(0) scale(1); }
 
-  .header {
-    padding:26px 32px 18px; border-bottom:2px solid rgba(255,255,255,0.08);
+  .cardHeader { padding:24px 32px 10px; }
+  .cardLabel { font-size:22px; color:rgba(255,255,255,0.55); font-weight:600; letter-spacing:1px; }
+  .balance { font-size:60px; font-weight:800; color:#FFFFFF; margin-top:6px; }
+
+  .flowRow {
     display:flex; align-items:center; justify-content:space-between;
-  }
-  .headerTitle { font-size:28px; font-weight:800; color:#FFFFFF; }
-  .headerTag {
-    font-size:18px; font-weight:700; color:#FF6B00;
-    background: rgba(255,107,0,0.12); padding:6px 14px; border-radius:8px;
+    padding:30px 50px; position:relative; height:180px;
   }
 
-  .scrollMask { position:relative; height:520px; overflow:hidden; }
-
-  .scrollTrack {
-    position:absolute; top:0; left:0; width:100%;
-    display:flex; flex-direction:column;
-    transform: translateY(0);
-    transition: transform 6s linear;
+  .flowSide { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .flowIcon {
+    width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   }
-  .scrollTrack.scroll { transform: translateY(-620px); }
+  .flowIcon.in { background: linear-gradient(135deg, #2ECC71, #00A896); }
+  .flowIcon.out { background: linear-gradient(135deg, #E63946, #FF6B00); }
+  .flowIcon svg { width:32px; height:32px; }
+  .flowLabel { font-size:20px; font-weight:700; color:rgba(255,255,255,0.7); }
+  .flowAmount { font-size:26px; font-weight:800; }
+  .flowAmount.in { color:#2ECC71; }
+  .flowAmount.out { color:#E63946; }
 
-  .row {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 32px; border-bottom:1px solid rgba(255,255,255,0.06);
+  /* Dots are positioned relative to the STAGE directly, not nested inside the
+     card's own layout - avoids any parent-transition interference entirely. */
+  .dot {
+    position:absolute; top:340px; width:20px; height:20px; border-radius:50%;
   }
-  .rowLeft { display:flex; flex-direction:column; }
-  .rowDesc { font-size:24px; font-weight:600; color:#FFFFFF; }
-  .rowDate { font-size:18px; color:rgba(255,255,255,0.45); margin-top:4px; }
-
-  .rowRight { display:flex; flex-direction:column; align-items:flex-end; }
-  .rowAmount { font-size:26px; font-weight:800; }
-  .rowAmount.credit { color:#2ECC71; }
-  .rowAmount.debit { color:#E63946; }
-
-  .rowTag {
-    font-size:15px; font-weight:800; letter-spacing:1px; margin-top:4px;
-    padding:3px 10px; border-radius:6px;
-  }
-  .rowTag.credit { color:#2ECC71; background: rgba(46,204,113,0.14); }
-  .rowTag.debit { color:#E63946; background: rgba(230,57,70,0.14); }
-
-  .fadeTop, .fadeBottom {
-    position:absolute; left:0; width:100%; height:60px; pointer-events:none; z-index:2;
-  }
-  .fadeTop { top:0; background: linear-gradient(180deg, #121212, transparent); }
-  .fadeBottom { bottom:0; background: linear-gradient(0deg, #121212, transparent); }
+  .dotGreen { left:270px; background:#2ECC71; box-shadow:0 0 16px #2ECC71; transition: left 1.5s ease-in; }
+  .dotRed { left:800px; background:#E63946; box-shadow:0 0 16px #E63946; transition: left 1.5s ease-in; }
+  .dotGreen.moved { left:540px; }
+  .dotRed.moved { left:540px; }
 </style>
 </head>
 <body>
   <div class="stage">
-    <div class="cardWrap" id="cardWrap">
-      <div class="header">
-        <div class="headerTitle">Bank Statement</div>
-        <div class="headerTag">GTB •••• 4521</div>
+    <div class="cardWrap">
+      <div class="cardHeader">
+        <div class="cardLabel">BUSINESS ACCOUNT BALANCE</div>
+        <div class="balance">₦1,240,000</div>
       </div>
-      <div class="scrollMask">
-        <div class="fadeTop"></div>
-        <div class="scrollTrack" id="scrollTrack">
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Client Payment - ABC Ltd</div><div class="rowDate">3 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦180,000</div><div class="rowTag credit">CREDIT</div></div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Office Rent</div><div class="rowDate">4 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦95,000</div><div class="rowTag debit">DEBIT</div></div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Consulting Fee</div><div class="rowDate">6 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦240,000</div><div class="rowTag credit">CREDIT</div></div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Fuel & Transport</div><div class="rowDate">9 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦32,000</div><div class="rowTag debit">DEBIT</div></div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Staff Salary</div><div class="rowDate">10 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦310,000</div><div class="rowTag debit">DEBIT</div></div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Loan Disbursement</div><div class="rowDate">12 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦500,000</div><div class="rowTag credit">CREDIT</div></div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Internet Subscription</div><div class="rowDate">14 Jun</div></div><div class="rowRight"><div class="rowAmount debit">-₦18,000</div><div class="rowTag debit">DEBIT</div></div></div>
-          <div class="row"><div class="rowLeft"><div class="rowDesc">Product Sales</div><div class="rowDate">15 Jun</div></div><div class="rowRight"><div class="rowAmount credit">+₦95,500</div><div class="rowTag credit">CREDIT</div></div></div>
+      <div class="flowRow">
+        <div class="flowSide">
+          <div class="flowIcon in"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
+          <div class="flowLabel">MONEY IN</div>
+          <div class="flowAmount in">+₦420,000</div>
         </div>
-        <div class="fadeBottom"></div>
+        <div class="flowSide">
+          <div class="flowIcon out"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 5 19 12"/></svg></div>
+          <div class="flowLabel">MONEY OUT</div>
+          <div class="flowAmount out">-₦310,000</div>
+        </div>
       </div>
     </div>
+
+    <div class="dot dotGreen" id="dotGreen"></div>
+    <div class="dot dotRed" id="dotRed"></div>
   </div>
 
 <script>
-  const cardWrap = document.getElementById('cardWrap');
-  const scrollTrack = document.getElementById('scrollTrack');
-
-  setTimeout(() => { cardWrap.classList.add('show'); }, 200);
-  setTimeout(() => { scrollTrack.classList.add('scroll'); }, 900);
+  setTimeout(() => {
+    document.getElementById('dotGreen').classList.add('moved');
+    document.getElementById('dotRed').classList.add('moved');
+  }, 600);
 </script>
 </body>
 </html>

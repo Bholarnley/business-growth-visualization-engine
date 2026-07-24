@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  html, body { margin:0; padding:0; background:#000; width:1080px; height:1920px; }
+  .dot {
+    position:absolute; top:200px; left:100px; width:40px; height:40px;
+    border-radius:50%; background:#2ECC71;
+    transition: left 1.5s ease-in;
+  }
+  .dot.moved { left:800px; }
+</style>
+</head>
+<body>
+  <div class="dot" id="dot"></div>
+  <script>
+    setTimeout(() => {
+      document.getElementById('dot').classList.add('moved');
+    }, 500);
+  </script>
+</body>
+</html>
