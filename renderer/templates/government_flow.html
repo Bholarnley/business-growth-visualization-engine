@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
+
+  .heading {
+    position:absolute; top:100px; left:50%; transform:translateX(-50%) scale(0.8); opacity:0;
+    font-size:34px; font-weight:800; color:#FFFFFF;
+    background: linear-gradient(135deg, #1B2430, #4A4A4A);
+    padding:16px 32px; border-radius:14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(.22,.68,0,1.01), opacity 0.8s ease;
+  }
+  .heading.show { transform:translateX(-50%) scale(1); opacity:1; }
+
+  .iconWrap {
+    position:absolute; top:280px; left:50%; transform:translateX(-50%) scale(0);
+    transition: transform 0.7s cubic-bezier(.34,1.56,.64,1);
+  }
+  .iconWrap.show { transform:translateX(-50%) scale(1); }
+  .iconWrap svg { width:280px; height:280px; }
+
+  .docFlow {
+    position:absolute; top:600px; left:50%; width:8px; height:0;
+    background: linear-gradient(180deg, #FF6B00, transparent);
+    transform:translateX(-50%);
+    transition: height 0.8s ease;
+  }
+  .docFlow.show { height:120px; }
+
+  .docIcon {
+    position:absolute; top:720px; left:50%; transform:translateX(-50%) translateY(-20px) scale(0.5);
+    opacity:0; transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .docIcon.show { opacity:1; transform:translateX(-50%) translateY(0) scale(1); }
+  .docIcon svg { width:90px; height:90px; }
+
+  .label {
+    position:absolute; top:850px; left:50%; transform:translateX(-50%) translateY(15px);
+    font-size:32px; font-weight:800; color:#FFFFFF; text-align:center;
+    background: rgba(18,18,18,0.82); padding:14px 28px; border-radius:14px;
+    opacity:0; transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .label.show { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="heading" id="heading">TAX AUTHORITY</div>
+
+    <div class="iconWrap" id="iconWrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="1.5">
+        <path d="M4 21V9L12 3L20 9V21" fill="rgba(255,107,0,0.12)"/>
+        <line x1="2" y1="21" x2="22" y2="21" stroke="#FFFFFF"/>
+        <line x1="9" y1="21" x2="9" y2="13" stroke="#FFFFFF"/>
+        <line x1="15" y1="21" x2="15" y2="13" stroke="#FFFFFF"/>
+        <line x1="7" y1="10" x2="7" y2="8" stroke="#FFB800" stroke-width="2"/>
+        <line x1="12" y1="10" x2="12" y2="8" stroke="#FFB800" stroke-width="2"/>
+        <line x1="17" y1="10" x2="17" y2="8" stroke="#FFB800" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="docFlow" id="docFlow"></div>
+
+    <div class="docIcon" id="docIcon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+        <rect x="4" y="2" width="16" height="20" rx="2" fill="rgba(18,18,18,0.9)"/>
+        <line x1="8" y1="8" x2="16" y2="8" stroke="#FF6B00"/>
+        <line x1="8" y1="12" x2="16" y2="12" stroke="#FF6B00"/>
+        <line x1="8" y1="16" x2="12" y2="16" stroke="#FF6B00"/>
+      </svg>
+    </div>
+
+    <div class="label" id="label">COMPANY INCOME TAX (CIT)</div>
+  </div>
+
+<script>
+  const heading = document.getElementById('heading');
+  const iconWrap = document.getElementById('iconWrap');
+  const docFlow = document.getElementById('docFlow');
+  const docIcon = document.getElementById('docIcon');
+  const label = document.getElementById('label');
+
+  setTimeout(() => { heading.classList.add('show'); }, 200);
+  setTimeout(() => { iconWrap.classList.add('show'); }, 700);
+  setTimeout(() => { docFlow.classList.add('show'); }, 1500);
+  setTimeout(() => { docIcon.classList.add('show'); }, 2100);
+  setTimeout(() => { label.classList.add('show'); }, 2700);
+</script>
+</body>
+</html>
