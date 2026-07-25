@@ -11,7 +11,7 @@ if os.path.isdir(frames_dir):
 os.makedirs(frames_dir, exist_ok=True)
 
 FPS = 30
-DURATION = 3.6
+DURATION = 7.0   # extended to match the full spoken window (13s-20s), holds the finished state
 TOTAL_FRAMES = int(FPS * DURATION)
 
 with sync_playwright() as p:
