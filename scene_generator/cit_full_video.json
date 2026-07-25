@@ -1,0 +1,22 @@
+{
+  "source_video": "new_llc.mp4",
+  "logo": "logo_MJB.jpg",
+  "output_name": "cit_final_video.mp4",
+  "scenes": [
+    { "template": "approval_stamp_registered", "frames_folder": "frames_stamp_registered", "start_time": 0, "duration": 2.2 },
+    { "template": "confetti_burst", "frames_folder": "frames_confetti_burst", "start_time": 0, "duration": 2.0 },
+    { "template": "bank_statement", "frames_folder": "frames_bank_statement", "start_time": 5, "duration": 5.0 },
+    { "template": "warning_massive_shock", "frames_folder": "frames_warning_massive_shock", "start_time": 10, "duration": 3.0 },
+    { "template": "government_flow", "frames_folder": "frames_government_flow", "start_time": 13, "duration": 7.0 },
+    { "template": "stamp_not_accepted", "frames_folder": "frames_stamp_not_accepted", "start_time": 20, "duration": 1.5 },
+    { "template": "stamp_audited_reports", "frames_folder": "frames_stamp_audited_reports", "start_time": 21.5, "duration": 2.2 },
+    { "template": "process_flow", "frames_folder": "frames_process_flow", "start_time": 26, "duration": 15.0 },
+    { "template": "cit_timeline", "frames_folder": "frames_cit_timeline", "start_time": 41, "duration": 13.0 },
+    { "template": "boj_alert", "frames_folder": "frames_boj_alert", "start_time": 54, "duration": 4.0 },
+    { "template": "myth_fact_reveal", "frames_folder": "frames_myth_the_secret_isn_t_finding_a_fas", "start_time": 58, "duration": 9.0 },
+    { "template": "before_after_card", "frames_folder": "frames_before_after", "start_time": 67, "duration": 9.0 },
+    { "template": "text_highlight_1", "frames_folder": "frames_text_highlight_stop_waiting_until_the_last_minute_to_or", "start_time": 78, "duration": 2.0 },
+    { "template": "text_highlight_2", "frames_folder": "frames_text_highlight_hit_the_follow_button_to_learn_how_to_st", "start_time": 80, "duration": 3.0 },
+    { "template": "orbit_outro", "frames_folder": "frames_orbit_outro", "start_time": 84, "duration": 3.2 }
+  ]
+}

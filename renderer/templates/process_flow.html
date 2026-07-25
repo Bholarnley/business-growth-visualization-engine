@@ -42,7 +42,7 @@
   }
 
   .stepLabel {
-    font-size:30px; font-weight:700; color: rgba(255,255,255,0.4);
+    font-size:28px; font-weight:700; color: rgba(255,255,255,0.4);
     background: rgba(18,18,18,0.6); padding:18px 26px; border-radius:12px; flex:1;
     transition: all 0.5s ease;
   }
@@ -58,30 +58,30 @@
 </head>
 <body>
   <div class="stage">
-    <div class="heading" id="heading">GETTING COMPLIANT</div>
+    <div class="heading" id="heading">FROM STATEMENT TO AUDIT</div>
 
     <div class="flow" id="flow">
       <div class="stepRow">
         <div class="stepCircle" data-i="0">1</div>
-        <div class="stepLabel" data-i="0">Register your business</div>
+        <div class="stepLabel" data-i="0">Bank Statement</div>
       </div>
       <div class="connector" data-i="0"></div>
 
       <div class="stepRow">
         <div class="stepCircle" data-i="1">2</div>
-        <div class="stepLabel" data-i="1">Set up proper bookkeeping</div>
+        <div class="stepLabel" data-i="1">Sorted Bookkeeping</div>
       </div>
       <div class="connector" data-i="1"></div>
 
       <div class="stepRow">
         <div class="stepCircle" data-i="2">3</div>
-        <div class="stepLabel" data-i="2">File monthly & annual returns</div>
+        <div class="stepLabel" data-i="2">Profit &amp; Loss Report</div>
       </div>
       <div class="connector" data-i="2"></div>
 
       <div class="stepRow">
         <div class="stepCircle" data-i="3">4</div>
-        <div class="stepLabel" data-i="3">Stay audit-ready year round</div>
+        <div class="stepLabel" data-i="3">Verified by Auditor</div>
       </div>
     </div>
   </div>
@@ -93,12 +93,12 @@
   const connectors = document.querySelectorAll('.connector');
 
   const startDelay = 200;
-  const stepStagger = 550;
+  const stepStagger = 3200;   // spread across the full 15-second window
 
   setTimeout(() => { heading.classList.add('show'); }, startDelay);
 
   circles.forEach((circle, i) => {
-    const delay = startDelay + 600 + i * stepStagger;
+    const delay = startDelay + 800 + i * stepStagger;
     setTimeout(() => {
       circle.classList.add('active');
       labels[i].classList.add('active');

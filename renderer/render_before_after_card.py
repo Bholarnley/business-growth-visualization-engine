@@ -1,13 +1,17 @@
 from playwright.sync_api import sync_playwright
 import os
+import shutil
 
 here = os.path.dirname(os.path.abspath(__file__))
 html_path = os.path.join(here, "templates", "before_after_card.html")
 frames_dir = os.path.join(here, "frames_before_after")
+
+if os.path.isdir(frames_dir):
+    shutil.rmtree(frames_dir)
 os.makedirs(frames_dir, exist_ok=True)
 
 FPS = 30
-DURATION = 4.2
+DURATION = 9.0   # extended to match the full spoken line, 67s-76s
 TOTAL_FRAMES = int(FPS * DURATION)
 
 with sync_playwright() as p:
@@ -18,6 +22,8 @@ with sync_playwright() as p:
     for i in range(TOTAL_FRAMES):
         page.screenshot(path=os.path.join(frames_dir, f"frame_{i:04d}.png"), omit_background=True)
         page.wait_for_timeout(1000 / FPS)
+        if i % 20 == 0:
+            print(f"  frame {i}/{TOTAL_FRAMES}")
 
     browser.close()
 

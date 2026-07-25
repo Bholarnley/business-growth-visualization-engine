@@ -1,24 +1,88 @@
-from playwright.sync_api import sync_playwright
-import os
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="brand_colors.css">
+<style>
+  html, body {
+    margin:0; padding:0; background: transparent;
+    width:1080px; height:1920px; overflow:hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+  }
+  .stage { position:relative; width:1080px; height:1920px; }
 
-here = os.path.dirname(os.path.abspath(__file__))
-html_path = os.path.join(here, "templates", "myth_fact_reveal.html")
-frames_dir = os.path.join(here, "frames_myth_fact")
-os.makedirs(frames_dir, exist_ok=True)
+  .mythCard {
+    position:absolute; top:260px; left:60px; width:960px;
+    background: linear-gradient(135deg, #3a1414, #121212);
+    border-radius:22px; padding:36px 40px;
+    opacity:0; transform:translateY(-30px) scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.01);
+    box-shadow: 0 10px 40px rgba(230,57,70,0.25);
+  }
+  .mythCard.show { opacity:1; transform:translateY(0) scale(1); }
 
-FPS = 30
-DURATION = 4.0
-TOTAL_FRAMES = int(FPS * DURATION)
+  .mythTag {
+    font-size:24px; font-weight:800; color: #E63946; letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .mythText {
+    font-size:34px; font-weight:700; color: rgba(255,255,255,0.65); line-height:1.5;
+    position:relative;
+  }
+  .strikeLine {
+    position:absolute; top:50%; left:0; width:0%; height:4px;
+    background: #E63946; transform:translateY(-50%);
+    transition: width 0.7s ease;
+  }
+  .strikeLine.show { width:100%; }
 
-with sync_playwright() as p:
-    browser = p.chromium.launch()
-    page = browser.new_page(viewport={"width": 1080, "height": 1920})
-    page.goto(f"file:///{html_path.replace(os.sep, '/')}")
+  .factCard {
+    position:absolute; top:640px; left:60px; width:960px;
+    background: linear-gradient(135deg, #00A896, #00796b);
+    border-radius:22px; padding:36px 40px;
+    opacity:0; transform:translateY(30px) scale(0.9);
+    transition: opacity 0.6s cubic-bezier(.17,.89,.32,1.49), transform 0.6s cubic-bezier(.17,.89,.32,1.49);
+    box-shadow: 0 6px 20px rgba(0,168,150,0.4);
+  }
+  .factCard.show { opacity:1; transform:translateY(0) scale(1); }
 
-    for i in range(TOTAL_FRAMES):
-        page.screenshot(path=os.path.join(frames_dir, f"frame_{i:04d}.png"), omit_background=True)
-        page.wait_for_timeout(1000 / FPS)
+  .factTag {
+    font-size:24px; font-weight:800; color: #FFFFFF; letter-spacing:2px;
+    margin-bottom:14px; display:flex; align-items:center; gap:10px;
+  }
+  .checkIcon {
+    width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,0.25);
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .factText {
+    font-size:34px; font-weight:800; color: #FFFFFF; line-height:1.5;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="mythCard" id="mythCard">
+      <div class="mythTag">THE MYTH</div>
+      <div class="mythText">
+        "If I increase my prices, my customers will leave."
+        <div class="strikeLine" id="strikeLine"></div>
+      </div>
+    </div>
 
-    browser.close()
+    <div class="factCard" id="factCard">
+      <div class="factTag"><span class="checkIcon">✓</span>THE TRUTH</div>
+      <div class="factText">Customers don't leave because of price. They leave because they don't see the value.</div>
+    </div>
+  </div>
 
-print(f"Captured {TOTAL_FRAMES} frames into: {frames_dir}")
+<script>
+  const mythCard = document.getElementById('mythCard');
+  const strikeLine = document.getElementById('strikeLine');
+  const factCard = document.getElementById('factCard');
+
+  setTimeout(() => { mythCard.classList.add('show'); }, 200);
+  setTimeout(() => { strikeLine.classList.add('show'); }, 1400);
+  setTimeout(() => { factCard.classList.add('show'); }, 2300);
+</script>
+</body>
+</html>
