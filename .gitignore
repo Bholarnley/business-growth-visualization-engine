@@ -7,3 +7,6 @@ frames/
 frames_*/
 *.mp4
 *.webm
+app/dist/
+app/build/
+app/*.spec
